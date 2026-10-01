@@ -1,7 +1,10 @@
 ﻿using System;
 
-public class Message
+namespace OlxClient.Models
 {
-    public string Name { get; set; }
-    public string Data { get; set; }
+    public class Message
+    {
+        public required string Name { get; set; }
+        public required string Data { get; set; }
+    }
 }
