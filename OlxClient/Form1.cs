@@ -10,12 +10,20 @@ namespace OlxClient
         public Form1()
         {
             InitializeComponent();
+
+            btPSend.Visible = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both username and password");
+                return;
+            }
 
             string serverResponse = SendToServer($"Login: {username} Password:{password}");
 
@@ -52,14 +60,80 @@ namespace OlxClient
 
         }
 
-        private void ProcessServerResponse(string serverResponse)
+        private void ProcessServerResponse(string response)
         {
-            throw new NotImplementedException();
+            var parts = response.Split(',');
+
+            if (parts[0] == "Success")
+            {
+                CurrentUserRole = parts[1];
+                MessageBox.Show($"Login successful. Role: {CurrentUserRole}");
+
+                txtUsername.Visible = false;
+                txtPassword.Visible = false;
+                btnLogin.Visible = false;
+                btnRegister.Visible = false;
+                lbLogin.Visible = false;
+                lbPassword.Visible = false;
+
+                tabControl1.SelectedIndex = 1;
+    
+                if (CurrentUserRole == "Admin")
+                {
+                    btPSend.Visible = true;
+                    //btnDelete.Visible = true;
+                }
+                else if (CurrentUserRole == "User")
+                {
+                    btPSend.Visible = true;
+                    //btnDelete.Visible = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Login failed");
+            }
         }
 
-        private string SendToServer(string v)
+        private string SendToServer(string message)
         {
-            throw new NotImplementedException();
+            if (message.StartsWith("Register"))
+            {
+                return "Success,Registered";
+            }
+
+            if (message.Contains("admin"))
+            {
+                return "Success,Admin";
+            }
+
+            return "Success,User";
+        }
+
+        // registration doesn't work because the server is not implemented yet, but the client side is ready to send the registration request to the server
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both username and password");
+                return;
+            }
+            string serverResponse = SendToServer($"Register: {username} Password:{password}");
+
+            if (serverResponse.StartsWith("Success"))
+            {
+                MessageBox.Show("Registration successful. You can now login");
+
+                txtUsername.Clear();
+                txtPassword.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Registration failed");
+            }
         }
     }
 }

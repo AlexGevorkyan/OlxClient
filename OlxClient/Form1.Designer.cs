@@ -32,12 +32,11 @@
             tabPage1 = new TabPage();
             btnRegister = new Button();
             btnLogin = new Button();
-            label2 = new Label();
-            label1 = new Label();
+            lbPassword = new Label();
+            lbLogin = new Label();
             txtPassword = new TextBox();
             txtUsername = new TextBox();
             tabPage2 = new TabPage();
-            tabPage3 = new TabPage();
             btPSend = new Button();
             rtbPDescription = new RichTextBox();
             tbPStatus = new TextBox();
@@ -49,6 +48,7 @@
             lblPDescription = new Label();
             tbPName = new TextBox();
             lblPName = new Label();
+            tabPage3 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -71,15 +71,15 @@
             // 
             tabPage1.Controls.Add(btnRegister);
             tabPage1.Controls.Add(btnLogin);
-            tabPage1.Controls.Add(label2);
-            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(lbPassword);
+            tabPage1.Controls.Add(lbLogin);
             tabPage1.Controls.Add(txtPassword);
             tabPage1.Controls.Add(txtUsername);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Margin = new Padding(2, 1, 2, 1);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(2, 1, 2, 1);
-            tabPage1.Size = new Size(769, 310);
+            tabPage1.Size = new Size(998, 584);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Auth";
             tabPage1.UseVisualStyleBackColor = true;
@@ -92,6 +92,7 @@
             btnRegister.TabIndex = 5;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
             // btnLogin
             // 
@@ -103,23 +104,23 @@
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
-            // label2
+            // lbPassword
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(368, 121);
-            label2.Name = "label2";
-            label2.Size = new Size(57, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Password";
+            lbPassword.AutoSize = true;
+            lbPassword.Location = new Point(368, 121);
+            lbPassword.Name = "lbPassword";
+            lbPassword.Size = new Size(57, 15);
+            lbPassword.TabIndex = 3;
+            lbPassword.Text = "Password";
             // 
-            // label1
+            // lbLogin
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(368, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(37, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Login";
+            lbLogin.AutoSize = true;
+            lbLogin.Location = new Point(368, 37);
+            lbLogin.Name = "lbLogin";
+            lbLogin.Size = new Size(37, 15);
+            lbLogin.TabIndex = 2;
+            lbLogin.Text = "Login";
             // 
             // txtPassword
             // 
@@ -156,16 +157,6 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Sell";
             tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            tabPage3.Location = new Point(4, 24);
-            tabPage3.Margin = new Padding(2, 1, 2, 1);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(769, 310);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Buy";
-            tabPage3.UseVisualStyleBackColor = true;
             // 
             // btPSend
             // 
@@ -268,6 +259,16 @@
             lblPName.TabIndex = 11;
             lblPName.Text = "Name:";
             // 
+            // tabPage3
+            // 
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Margin = new Padding(2, 1, 2, 1);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Size = new Size(998, 584);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Buy";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -291,8 +292,8 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private Label label2;
-        private Label label1;
+        private Label lbPassword;
+        private Label lbLogin;
         private TextBox txtPassword;
         private TextBox txtUsername;
         private Button btnRegister;
