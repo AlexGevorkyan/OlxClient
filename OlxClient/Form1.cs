@@ -30,6 +30,12 @@ namespace OlxClient
 
         private void btPSend_Click(object sender, EventArgs e)
         {
+            if (ns == null || client == null)
+            {
+                MessageBox.Show("Not connected to server");
+                return;
+            }
+
             if (string.IsNullOrEmpty(tbPName.Text) || string.IsNullOrEmpty(tbPPrice.Text)
                 || string.IsNullOrEmpty(tbPUnit.Text) || string.IsNullOrEmpty(tbPStatus.Text))
             {
@@ -45,10 +51,6 @@ namespace OlxClient
 
             try
             {
-                client = new TcpClient();
-                client.Connect(tbAddress.Text.Trim(), Convert.ToInt32(tbPort.Text.Trim()));
-                ns = client.GetStream();
-
                 Product product = new()
                 {
                     //Id = 
@@ -68,11 +70,7 @@ namespace OlxClient
 
                 SendProduct(message);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unable to connect: {ex.Message}");
-                Disconnect();
-            }
+            catch { }
 
         }
 
@@ -105,6 +103,21 @@ namespace OlxClient
         private string SendToServer(string v)
         {
             throw new NotImplementedException();
+        }
+
+        private void btConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                client = new TcpClient();
+                client.Connect(tbAddress.Text.Trim(), Convert.ToInt32(tbPort.Text.Trim()));
+                ns = client.GetStream();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unable to connect: {ex.Message}");
+                Disconnect();
+            }
         }
     }
 }

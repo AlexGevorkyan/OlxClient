@@ -114,6 +114,7 @@
             btConnect.TabIndex = 7;
             btConnect.Text = "Connect";
             btConnect.UseVisualStyleBackColor = true;
+            btConnect.Click += btConnect_Click;
             // 
             // label4
             // 
